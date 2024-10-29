@@ -29,16 +29,20 @@ body {
 }
 .dashboard.game-connected.yes {
   background-image: url("images/neomorphic.png");
-  
+
   .attitude-indicator{
     position: absolute;
     left: 67px;
     top: 140px;
     width: 365px;
     height: 388px;
-    background-image: url("images/attitude-content.png");
     border-radius: 40px;
-    background-position: center;
+
+    @layer attitude-content {
+      background-image: url("images/attitude-content.png");
+      background-position: 50% 50%;
+    }
+
   }
 }
 
