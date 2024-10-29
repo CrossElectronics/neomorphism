@@ -25,11 +25,25 @@ body {
   visibility: visible;
 }
 .dashboard {
-  background-image: url("images/bg-off.png");
+
 }
 .dashboard.game-connected.yes {
-  background-image: url("images/bg-on.png");
+  background-image: url("images/neomorphic.png");
+  
+  .attitude-indicator{
+    position: absolute;
+    left: 67px;
+    top: 140px;
+    width: 365px;
+    height: 388px;
+    background-image: url("images/attitude-content.png");
+    border-radius: 40px;
+    background-position: center;
+  }
 }
+
+/*
+
 .truck-speed[data-type="meter"] {
   visibility: visible;
   position: absolute;
@@ -350,3 +364,4 @@ table._job td {
   font-size: 44px;
   color: orangered;
 }
+*/

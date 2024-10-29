@@ -1,4 +1,5 @@
-﻿Funbit.Ets.Telemetry.Dashboard.prototype.initialize = function (skinConfig, utils) {
+﻿// @ts-ignore
+Funbit.Ets.Telemetry.Dashboard.prototype.initialize = function (skinConfig, utils) {
     //
     // skinConfig - a copy of the skin configuration from config.json
     // utils - an object containing several utility functions (see skin tutorial for more information)
@@ -19,11 +20,13 @@
     ]);
 
     // return to menu by a click
+    // @ts-ignore
     $(document).add('body').on('click', function () {
         window.history.back();
     });
 }
 
+// @ts-ignore
 Funbit.Ets.Telemetry.Dashboard.prototype.filter = function (data, utils) {
     //
     // data - telemetry data JSON object
@@ -65,7 +68,7 @@ Funbit.Ets.Telemetry.Dashboard.prototype.filter = function (data, utils) {
     // return changed data to the core for rendering
     return data;
 };
-
+// @ts-ignore
 Funbit.Ets.Telemetry.Dashboard.prototype.render = function (data, utils) {
     //
     // data - same data object as in the filter function
