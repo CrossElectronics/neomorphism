@@ -81,6 +81,12 @@ Funbit.Ets.Telemetry.Dashboard.prototype.filter = function (data, utils) {
     data.distanceInteger = distInt;
     data.distanceDecimal = Math.floor((remainDist - distInt * 1000) / 100);
     data.speedPos = -1080 + data.truck.speed * 6.20;
+    // speed trend
+    const accelVct = data.truck.acceleration
+    const accel = Math.sqrt(accelVct.x**2 + accelVct.y**2 + accelVct.z**2);
+    const spdTrendDelta = accel * 3; // speed trend after 3 sec
+    console.log(spdTrendDelta)
+    data.ledCount = Math.max(Math.min(Math.round(spdTrendDelta / 2.5), 11), -19)
 
     return data;
 };
@@ -93,4 +99,11 @@ Funbit.Ets.Telemetry.Dashboard.prototype.render = function (data, utils) {
 
     const spdInd = document.getElementById("speed-indicator");
     spdInd.style.backgroundPosition = "50% " + Math.round(data.speedPos) + "px"
+
+    const stiUpLed = data.ledCount > 0 ? data.ledCount : 0;
+    const stiDnLed = data.ledCount < 0 ? Math.abs(data.ledCount) : 0;
+    const stiUp = document.getElementById("sti-up");
+    const stiDn = document.getElementById("sti-dn");
+    stiUp.style.height = stiUpLed / 12 * 100 + "%"
+    stiDn.style.height = stiDnLed / 20 * 100 + "%"
 }
