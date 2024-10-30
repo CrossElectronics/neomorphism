@@ -27,7 +27,10 @@ body {
 .dashboard {
 
 }
-
+@font-face {
+  font-family: din-pro;
+  src: url("fonts/din_pro.otf") format("opentype");
+}
 @keyframes asi-test {
   0% {rotate: 0deg; background-position: 50% 50%;}
   12% {rotate: 0deg; background-position: 50% 99%;}
@@ -36,6 +39,60 @@ body {
   62% {rotate: -45deg; background-position: 50% 50%;}
   87% {rotate: 45deg; background-position: 50% 50%;}
   100% {rotate: 0deg; background-position: 50% 50%;}
+}
+/*layout styles*/
+.info-strip {
+  font: 30pt Helvetica, Arial, sans-serif;
+  color: #bfbfbf;
+}
+.mission-route {
+  display: flex;
+  flex-direction: row;
+  position: absolute;
+  top: 44px;
+  left: 17px;
+}
+.mission-deadline {
+  display: flex;
+  flex-direction: row;
+  position: absolute;
+  top: 44px;
+  left: 655px;
+}
+.truck-info{
+  display: flex;
+  flex-direction: row;
+  position: absolute;
+  top: 44px;
+  left: 979px;
+}
+.mission-distance {
+  display: flex;
+  flex-direction: row;
+  position: absolute;
+  top: 44px;
+  left: 1349px;
+}
+.distance-subtext {
+  display: flex;
+  flex-direction: row;
+  color: #ff3333;
+  font-size: 15pt;
+  position: relative;
+  top: 17px;
+  .km {
+    color: #bfbfbf;
+  }
+}
+.clock {
+  font-size: 67px;
+  font-family: din-pro, Helvetica, serif;
+  position: absolute;
+  left: 1695px;
+  top: 10px;
+  width: 160px;
+  height: 57px;
+  color: #bfbfbf;
 }
 
 .dashboard.game-connected.yes {
@@ -66,12 +123,6 @@ body {
     animation-name: asi-test;
     animation-duration: 5s;
     animation-timing-function: ease-in-out;
-  }
-  .attitude-indicator-shadow {
-    width: 100px;
-    height: 100px;
-    border-radius: 40px;
-    background-image: url("images/attitude-indicator-cover.png");
   }
 }
 

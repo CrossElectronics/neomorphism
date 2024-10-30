@@ -37,6 +37,7 @@ Funbit.Ets.Telemetry.Dashboard.prototype.filter = function (data, utils) {
     // before it is displayed on the dashboard.
     // You may convert km/h to mph, kilograms to tons, etc.
 
+    data.clock = undefined;
     data.hasJob = data.trailer.attached;
     // round truck speed
     data.truck.speedRounded = Math.abs(data.truck.speed > 0
@@ -57,7 +58,7 @@ Funbit.Ets.Telemetry.Dashboard.prototype.filter = function (data, utils) {
     // convert rpm to rpm * 100
     data.truck.engineRpm = data.truck.engineRpm / 100;
     // calculate wear
-    var wearSumPercent = data.truck.wearEngine * 100 +
+    let wearSumPercent = data.truck.wearEngine * 100 +
         data.truck.wearTransmission * 100 +
         data.truck.wearCabin * 100 +
         data.truck.wearChassis * 100 +
@@ -66,6 +67,13 @@ Funbit.Ets.Telemetry.Dashboard.prototype.filter = function (data, utils) {
     data.truck.wearSum = Math.round(wearSumPercent) + '%';
     data.trailer.wear = Math.round(data.trailer.wear * 100) + '%';
     // return changed data to the core for rendering
+    let remainingDate = new Date(data.job.remainingTime)
+    data.job.remainingTime =
+        utils.formatInteger(remainingDate.getDate(), 2) + " d " +
+        utils.formatInteger(remainingDate.getHours(), 2) + ":" +
+        utils.formatInteger(remainingDate.getMinutes(), 2) + "";
+    let now = new Date();
+    data.clock = utils.formatInteger(now.getHours(), 2) + ":" + utils.formatInteger(now.getMinutes(), 2);
     return data;
 };
 // @ts-ignore
