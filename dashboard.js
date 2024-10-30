@@ -80,6 +80,8 @@ Funbit.Ets.Telemetry.Dashboard.prototype.filter = function (data, utils) {
     const distInt = Math.floor(remainDist / 1000);
     data.distanceInteger = distInt;
     data.distanceDecimal = Math.floor((remainDist - distInt * 1000) / 100);
+    data.speedPos = -1080 + data.truck.speed * 6.20;
+
     return data;
 };
 // @ts-ignore
@@ -88,5 +90,7 @@ Funbit.Ets.Telemetry.Dashboard.prototype.render = function (data, utils) {
     asi.style.rotate = (data.truck.placement.roll * 360).toString();
     const pitch = 50 - data.truck.placement.pitch * 360 / 30 * 49;
     asi.style.backgroundPosition = "50% " + Math.round(pitch) + "%";
-    //console.log("P:" + data.truck.placement.pitch*360 + ", B:" + data.truck.placement.roll*360);
+
+    const spdInd = document.getElementById("speed-indicator");
+    spdInd.style.backgroundPosition = "50% " + Math.round(data.speedPos) + "px"
 }
