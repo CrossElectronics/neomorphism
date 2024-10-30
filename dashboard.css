@@ -132,6 +132,7 @@ body {
       animation-name: asi-test;
       animation-duration: 5s;
       animation-timing-function: ease-in-out;
+      transition: background-position 250ms linear;
     }
   }
 
@@ -154,6 +155,7 @@ body {
         background-position: 50% -1080px;
         background-repeat: no-repeat;
         animation: speed-scale-test 5s ease-in-out;
+        transition: background-position 200ms linear;
       }
     }
     @layer {
@@ -217,6 +219,7 @@ body {
         height: 100%;
         background-image: url("images/compass.png");
         background-position: 50% 50%;
+        transition: background-position 500ms linear;
       }
     }
     @layer {
@@ -250,6 +253,7 @@ body {
         background-position: 50% -1080px;
         background-repeat: no-repeat;
         animation: speed-scale-test 5s ease-in-out;
+        transition: background-position 2s linear;
       }
     }
     @layer {
