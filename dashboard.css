@@ -44,55 +44,55 @@ body {
 .info-strip {
   font: 30pt Helvetica, Arial, sans-serif;
   color: #bfbfbf;
-}
-.mission-route {
-  display: flex;
-  flex-direction: row;
-  position: absolute;
-  top: 44px;
-  left: 17px;
-}
-.mission-deadline {
-  display: flex;
-  flex-direction: row;
-  position: absolute;
-  top: 44px;
-  left: 655px;
-}
-.truck-info{
-  display: flex;
-  flex-direction: row;
-  position: absolute;
-  top: 44px;
-  left: 979px;
-}
-.mission-distance {
-  display: flex;
-  flex-direction: row;
-  position: absolute;
-  top: 44px;
-  left: 1349px;
-}
-.distance-subtext {
-  display: flex;
-  flex-direction: row;
-  color: #ff3333;
-  font-size: 15pt;
-  position: relative;
-  top: 17px;
-  .km {
+  .mission-route {
+    display: flex;
+    flex-direction: row;
+    position: absolute;
+    top: 44px;
+    left: 17px;
+  }
+  .mission-deadline {
+    display: flex;
+    flex-direction: row;
+    position: absolute;
+    top: 44px;
+    left: 655px;
+  }
+  .truck-info{
+    display: flex;
+    flex-direction: row;
+    position: absolute;
+    top: 44px;
+    left: 979px;
+  }
+  .mission-distance {
+    display: flex;
+    flex-direction: row;
+    position: absolute;
+    top: 44px;
+    left: 1349px;
+  }
+  .distance-subtext {
+    display: flex;
+    flex-direction: row;
+    color: #ff3333;
+    font-size: 15pt;
+    position: relative;
+    top: 17px;
+    .km {
+      color: #bfbfbf;
+    }
+  }
+  .clock {
+    font-size: 67px;
+    font-family: din-pro, Helvetica, serif;
+    position: absolute;
+    left: 1695px;
+    top: 10px;
+    width: 160px;
+    height: 57px;
     color: #bfbfbf;
   }
-}
-.clock {
-  font-size: 67px;
-  font-family: din-pro, Helvetica, serif;
-  position: absolute;
-  left: 1695px;
-  top: 10px;
-  width: 160px;
-  height: 57px;
-  color: #bfbfbf;
 }
 
 .dashboard.game-connected.yes {
@@ -109,20 +109,19 @@ body {
     background-image: url("images/attitude-indicator-background.png");
     mask-image: url("images/attitude-indicator-cover.png");
     mask-mode: alpha;
-  }
-
-  .attitude-indicator {
-    position: absolute;
-    left: -25%;
-    top: -25%;
-    width: 150%;
-    height: 150%;
-    background-image: url("images/attitude-content.png");
-    background-position: 50% 50%;
-    background-repeat: no-repeat;
-    animation-name: asi-test;
-    animation-duration: 5s;
-    animation-timing-function: ease-in-out;
+    .attitude-indicator {
+      position: absolute;
+      left: -25%;
+      top: -25%;
+      width: 150%;
+      height: 150%;
+      background-image: url("images/attitude-content.png");
+      background-position: 50% 50%;
+      background-repeat: no-repeat;
+      animation-name: asi-test;
+      animation-duration: 5s;
+      animation-timing-function: ease-in-out;
+    }
   }
 }
 
