@@ -78,11 +78,9 @@ Funbit.Ets.Telemetry.Dashboard.prototype.filter = function (data, utils) {
 };
 // @ts-ignore
 Funbit.Ets.Telemetry.Dashboard.prototype.render = function (data, utils) {
-    //
-    // data - same data object as in the filter function
-    // utils - an object containing several utility functions (see skin tutorial for more information)
-    //
-
-    // we don't have anything custom to render in this skin,
-    // but you may use jQuery here to update DOM or CSS
+    let asi = document.getElementById("attitude-indicator");
+    asi.style.rotate = (data.truck.placement.roll*360).toString();
+    let pitch = 50 - data.truck.placement.pitch * 360 / 30 * 49;
+    asi.style.backgroundPosition = "50% " + Math.round(pitch) + "%";
+    //console.log("P:" + data.truck.placement.pitch*360 + ", B:" + data.truck.placement.roll*360);
 }
