@@ -36,7 +36,7 @@ Funbit.Ets.Telemetry.Dashboard.prototype.filter = function (data, utils) {
     // This filter is used to change telemetry data 
     // before it is displayed on the dashboard.
     // You may convert km/h to mph, kilograms to tons, etc.
-
+    data.distanceInteger = undefined;
     data.clock = undefined;
     data.hasJob = data.trailer.attached;
     // round truck speed
@@ -67,20 +67,26 @@ Funbit.Ets.Telemetry.Dashboard.prototype.filter = function (data, utils) {
     data.truck.wearSum = Math.round(wearSumPercent) + '%';
     data.trailer.wear = Math.round(data.trailer.wear * 100) + '%';
     // return changed data to the core for rendering
-    let remainingDate = new Date(data.job.remainingTime)
+
+    // Own data
+    const remainingDate = new Date(data.job.remainingTime)
     data.job.remainingTime =
         utils.formatInteger(remainingDate.getDate(), 2) + " d " +
         utils.formatInteger(remainingDate.getHours(), 2) + ":" +
         utils.formatInteger(remainingDate.getMinutes(), 2) + "";
-    let now = new Date();
+    const now = new Date();
     data.clock = utils.formatInteger(now.getHours(), 2) + ":" + utils.formatInteger(now.getMinutes(), 2);
+    const remainDist = data.navigation.estimatedDistance;
+    const distInt = Math.floor(remainDist / 1000);
+    data.distanceInteger = distInt;
+    data.distanceDecimal = Math.floor((remainDist - distInt * 1000) / 100);
     return data;
 };
 // @ts-ignore
 Funbit.Ets.Telemetry.Dashboard.prototype.render = function (data, utils) {
-    let asi = document.getElementById("attitude-indicator");
-    asi.style.rotate = (data.truck.placement.roll*360).toString();
-    let pitch = 50 - data.truck.placement.pitch * 360 / 30 * 49;
+    const asi = document.getElementById("attitude-indicator");
+    asi.style.rotate = (data.truck.placement.roll * 360).toString();
+    const pitch = 50 - data.truck.placement.pitch * 360 / 30 * 49;
     asi.style.backgroundPosition = "50% " + Math.round(pitch) + "%";
     //console.log("P:" + data.truck.placement.pitch*360 + ", B:" + data.truck.placement.roll*360);
 }
