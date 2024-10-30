@@ -21,10 +21,11 @@ Funbit.Ets.Telemetry.Dashboard.prototype.initialize = function (skinConfig, util
     ]);
 
     // return to menu by a click
-    // @ts-ignore
+    /*
     $(document).add('body').on('click', function () {
         window.history.back();
     });
+    */
 }
 
 // @ts-ignore
@@ -88,10 +89,9 @@ Funbit.Ets.Telemetry.Dashboard.prototype.filter = function (data, utils) {
     let spdTrendDelta = accel * 10;// speed trend after 10 sec
     if (data.truck.speed < historySpd) spdTrendDelta = -spdTrendDelta;
     data.ledCount = Math.max(Math.min(Math.round(spdTrendDelta / 2.5), 11), -19);
-
     historySpd = data.truck.speed;
 
-    console.log(data.truck.placement.y)
+    data.altPos = -1080 + data.truck.placement.y * 3.2
     return data;
 };
 // @ts-ignore
@@ -110,4 +110,7 @@ Funbit.Ets.Telemetry.Dashboard.prototype.render = function (data, utils) {
     const stiDn = document.getElementById("sti-dn");
     stiUp.style.height = stiUpLed / 12 * 100 + "%"
     stiDn.style.height = stiDnLed / 20 * 100 + "%"
+
+    const altimeter = document.getElementById("altimeter")
+    altimeter.style.backgroundPosition = "50% " + Math.round(data.altPos) + "px"
 }
