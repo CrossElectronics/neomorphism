@@ -1,4 +1,5 @@
 ﻿// @ts-ignore
+let historySpd = 0;
 Funbit.Ets.Telemetry.Dashboard.prototype.initialize = function (skinConfig, utils) {
     //
     // skinConfig - a copy of the skin configuration from config.json
@@ -82,18 +83,21 @@ Funbit.Ets.Telemetry.Dashboard.prototype.filter = function (data, utils) {
     data.distanceDecimal = Math.floor((remainDist - distInt * 1000) / 100);
     data.speedPos = -1080 + data.truck.speed * 6.20;
     // speed trend
-    const accelVct = data.truck.acceleration
+    const accelVct = data.truck.acceleration;
     const accel = Math.sqrt(accelVct.x**2 + accelVct.y**2 + accelVct.z**2);
-    const spdTrendDelta = accel * 3; // speed trend after 3 sec
-    console.log(spdTrendDelta)
-    data.ledCount = Math.max(Math.min(Math.round(spdTrendDelta / 2.5), 11), -19)
+    let spdTrendDelta = accel * 10;// speed trend after 10 sec
+    if (data.truck.speed < historySpd) spdTrendDelta = -spdTrendDelta;
+    data.ledCount = Math.max(Math.min(Math.round(spdTrendDelta / 2.5), 11), -19);
 
+    historySpd = data.truck.speed;
+
+    console.log(data.truck.placement.y)
     return data;
 };
 // @ts-ignore
 Funbit.Ets.Telemetry.Dashboard.prototype.render = function (data, utils) {
     const asi = document.getElementById("attitude-indicator");
-    asi.style.rotate = (data.truck.placement.roll * 360).toString();
+    asi.style.rotate = (data.truck.placement.roll * 360) + "deg";
     const pitch = 50 - data.truck.placement.pitch * 360 / 30 * 49;
     asi.style.backgroundPosition = "50% " + Math.round(pitch) + "%";
 
