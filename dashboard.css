@@ -200,6 +200,37 @@ body {
     }
   }
 
+  .compass-container {
+    position: absolute;
+    left: 779px;
+    top: 555px;
+    width: 365px;
+    height: 85px;
+    border-radius: 5px;
+    overflow: hidden;
+    mask-image: url("images/horizontal-scale-cover.png");
+    mask-mode: alpha;
+    @layer {
+      .compass {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-image: url("images/compass.png");
+        background-position: 50% 50%;
+      }
+    }
+    @layer {
+      .scale-needle {
+        position: absolute;
+        left: 50%;
+        width: 8px;
+        height: 85px;
+        background-repeat: no-repeat;
+        background-image: url("images/scale-needle-vertical.png");
+      }
+    }
+  }
+
   .altimeter-container {
     position: absolute;
     left: 1209px;

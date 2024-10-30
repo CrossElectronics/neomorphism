@@ -87,18 +87,21 @@ Funbit.Ets.Telemetry.Dashboard.prototype.filter = function (data, utils) {
     const accelVct = data.truck.acceleration;
     const accel = Math.sqrt(accelVct.x**2 + accelVct.y**2 + accelVct.z**2);
     let spdTrendDelta = accel * 10;// speed trend after 10 sec
-    if (data.truck.speed < historySpd) spdTrendDelta = -spdTrendDelta;
+    if (data.truck.speed <= historySpd - 0.01) spdTrendDelta = -spdTrendDelta;
     data.ledCount = Math.max(Math.min(Math.round(spdTrendDelta / 2.5), 11), -19);
     historySpd = data.truck.speed;
 
-    data.altPos = -1080 + data.truck.placement.y * 3.2
+    data.altPos = -1080 + data.truck.placement.y * 3.2;
+
+    const heading = Math.abs((data.truck.placement.heading - 1) * 360);
+    data.compassPos = (256 - heading) * 3.33;
     return data;
 };
 // @ts-ignore
 Funbit.Ets.Telemetry.Dashboard.prototype.render = function (data, utils) {
     const asi = document.getElementById("attitude-indicator");
     asi.style.rotate = (data.truck.placement.roll * 360) + "deg";
-    const pitch = 50 - data.truck.placement.pitch * 360 / 30 * 49;
+    const pitch = 50 - data.truck.placement.pitch * 360 / 15 * 49;
     asi.style.backgroundPosition = "50% " + Math.round(pitch) + "%";
 
     const spdInd = document.getElementById("speed-indicator");
@@ -108,9 +111,12 @@ Funbit.Ets.Telemetry.Dashboard.prototype.render = function (data, utils) {
     const stiDnLed = data.ledCount < 0 ? Math.abs(data.ledCount) : 0;
     const stiUp = document.getElementById("sti-up");
     const stiDn = document.getElementById("sti-dn");
-    stiUp.style.height = stiUpLed / 12 * 100 + "%"
-    stiDn.style.height = stiDnLed / 20 * 100 + "%"
+    stiUp.style.height = stiUpLed / 12 * 100 + "%";
+    stiDn.style.height = stiDnLed / 20 * 100 + "%";
 
-    const altimeter = document.getElementById("altimeter")
-    altimeter.style.backgroundPosition = "50% " + Math.round(data.altPos) + "px"
+    const altimeter = document.getElementById("altimeter");
+    altimeter.style.backgroundPosition = "50% " + Math.round(data.altPos) + "px";
+
+    const compass = document.getElementById("compass");
+    compass.style.backgroundPosition = data.compassPos + "px 50%";
 }
