@@ -16,401 +16,580 @@
 
 */
 body {
-  cursor: pointer;
+    cursor: pointer;
 }
+
 .hidden {
-  visibility: hidden;
+    visibility: hidden;
 }
+
 .visible {
-  visibility: visible;
+    visibility: visible;
 }
+
 .dashboard {
 
 }
+
 @font-face {
-  font-family: din-pro;
-  src: url("fonts/din_pro.otf") format("opentype");
+    font-family: din-pro;
+    src: url("fonts/din_pro.otf") format("opentype");
 }
+
 @font-face {
-  font-family: Helvetica;
-  src: url("fonts/helvetica_neue.otf") format("opentype");
+    font-family: Helvetica;
+    src: url("fonts/helvetica_neue.otf") format("opentype");
 }
+
 @keyframes asi-test {
-  0% {rotate: 0deg; background-position: 50% 50%;}
-  12% {rotate: 0deg; background-position: 50% 99%;}
-  37% {rotate: 0deg; background-position: 50% 1%;}
-  50% {rotate: 0deg; background-position: 50% 50%;}
-  62% {rotate: -45deg; background-position: 50% 50%;}
-  87% {rotate: 45deg; background-position: 50% 50%;}
-  100% {rotate: 0deg; background-position: 50% 50%;}
-}
-@keyframes speed-scale-test {
-  0% {background-position: 50% -1080px}
-  25% {background-position: 50% -200px}
-  75% {background-position: 50% -1280px}
-  100% {background-position: 50% -1080px}
-}
-@keyframes sti-test {
-  0% {height: 0}
-  25% {height: 100%}
-  100% {height: 0}
-}
-/*layout styles*/
-.info-strip {
-  font: 30pt Helvetica, Arial, sans-serif;
-  color: #bfbfbf;
-  .mission-route {
-    display: flex;
-    flex-direction: row;
-    position: absolute;
-    top: 44px;
-    left: 17px;
-  }
-  .mission-deadline {
-    display: flex;
-    flex-direction: row;
-    position: absolute;
-    top: 44px;
-    left: 655px;
-  }
-  .truck-info{
-    display: flex;
-    flex-direction: row;
-    position: absolute;
-    top: 44px;
-    left: 979px;
-  }
-  .mission-distance {
-    display: flex;
-    flex-direction: row;
-    position: absolute;
-    top: 44px;
-    left: 1349px;
-  }
-  .distance-subtext {
-    display: flex;
-    flex-direction: row;
-    color: #ff3333;
-    font-size: 15pt;
-    position: relative;
-    top: 17px;
-    .km {
-      color: #bfbfbf;
-    }
-  }
-  .clock {
-    font-size: 67px;
-    font-family: din-pro, Helvetica, serif;
-    position: absolute;
-    left: 1695px;
-    top: 10px;
-    width: 160px;
-    height: 57px;
-    color: #bfbfbf;
-  }
-}
-
-.dashboard.game-connected {
-  background-image: url("images/neomorphic.png");
-
-  .wear-container {
-    position: absolute;
-    left: 0;
-    top: -139px;
-    font: 25px Helvetica, Arial, sans-serif;
-    color: rgb(255, 255, 255);
-    .trailer-wear {
-      position: absolute;
-      left: 62px;
-      top: 375px;
-      width: 63px;
-      height: 20px;
-    }
-    .truck-wearCabin {
-      position: absolute;
-      left: 355px;
-      top: 375px;
-      width: 63px;
-      height: 20px;
-    }
-    .truck-wearEngine {
-      position: absolute;
-      left: 437.536px;
-      top: 473.271px;
-      width: 63px;
-      height: 20px;
-    }
-    .truck-wearTransmission {
-      position: absolute;
-      left: 437.536px;
-      top: 567.271px;
-      width: 63px;
-      height: 20px;
-    }
-    .truck-wearSum {
-      position: absolute;
-      left: 437.536px;
-      top: 667.271px;
-      width: 63px;
-      height: 20px;
-    }
-    .truck-wearChassis {
-      position: absolute;
-      left: 208.536px;
-      top: 667.271px;
-      width: 63px;
-      height: 20px;
-    }
-    .truck-wearWheels {
-      position: absolute;
-      left: 61.536px;
-      top: 667.271px;
-      width: 63px;
-      height: 20px;
-    }
-  }
-
-  .odometer-container {
-    position: absolute;
-    left: 79px;
-    top: 877px;
-    width: 414px;
-    height: 81px;
-    border-radius: 10px;
-    overflow: hidden;
-    background-repeat: no-repeat;
-    background-image: url("images/odometer.png");
-    mask-image: url("images/odometer-cover.png");
-    mask-mode: alpha;
-    .odometer-digit0 {
-      position: absolute;
-      width: 55px;
-      top: 4px;
-      height: 100%;
-      background-image: url("images/wheel-black.png");
-      left: 4px;
-      border-radius: 0;
-      background-position: 50% 0%;
-    }
-    .odometer-digit1 {
-      position: absolute;
-      width: 55px;
-      top: 4px;
-      height: 100%;
-      background-image: url("images/wheel-black.png");
-      left: 54px;
-      border-radius: 0;
-      background-position: 50% 0%;
-    }
-    .odometer-digit2 {
-      position: absolute;
-      width: 55px;
-      top: 4px;
-      height: 100%;
-      background-image: url("images/wheel-black.png");
-      left: 106px;
-      border-radius: 0;
-      background-position: 50% 0%;
-    }
-    .odometer-digit3 {
-      position: absolute;
-      width: 55px;
-      top: 4px;
-      height: 100%;
-      background-image: url("images/wheel-black.png");
-      left: 182px;
-      border-radius: 0;
-      background-position: 50% 0%;
-    }
-    .odometer-digit4 {
-      position: absolute;
-      width: 55px;
-      top: 4px;
-      height: 100%;
-      background-image: url("images/wheel-black.png");
-      left: 234px;
-      border-radius: 0;
-      background-position: 50% 0%;
-    }
-    .odometer-digit5 {
-      position: absolute;
-      width: 55px;
-      top: 4px;
-      height: 100%;
-      background-image: url("images/wheel-black.png");
-      left: 286px;
-      border-radius: 0;
-      background-position: 50% 0%;
-    }
-    .odometer-decimal {
-      position: absolute;
-      width: 55px;
-      top: 4px;
-      height: 100%;
-      background-image: url("images/wheel-red.png");
-      left: 360px;
-      border-radius: 0;
-      background-position: 50% 0%;
-    }
-  }
-
-  .attitude-indicator-container {
-    position: absolute;
-    left: 779px;
-    top: 140px;
-    width: 365px;
-    height: 388px;
-    border-radius: 40px;
-    overflow: hidden;
-    background-image: url("images/attitude-indicator-background.png");
-    mask-image: url("images/attitude-indicator-cover.png");
-    mask-mode: alpha;
-    .attitude-indicator {
-      position: absolute;
-      left: -25%;
-      top: -25%;
-      width: 150%;
-      height: 150%;
-      background-image: url("images/attitude-content.png");
-      background-position: 50% 50%;
-      background-repeat: no-repeat;
-      animation-name: asi-test;
-      animation-duration: 5s;
-      animation-timing-function: ease-in-out;
-      transition: background-position 250ms linear;
-    }
-  }
-
-  .speed-indicator-container {
-    position: absolute;
-    left: 601px;
-    top: 139px;
-    width: 115px;
-    height: 491px;
-    border-radius: 40px;
-    overflow: hidden;
-    mask-image: url("images/vertical-scale-cover.png");
-    mask-mode: alpha;
-    @layer {
-      .speed-indicator {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        background-image: url("images/speed-scale.png");
-        background-position: 50% -1080px;
-        background-repeat: no-repeat;
-        animation: speed-scale-test 5s ease-in-out;
-        transition: background-position 200ms linear;
-      }
-    }
-    @layer {
-      .scale-needle {
-        position: absolute;
-        top: 192px;
-        width: 115px;
-        height: 8px;
-        background-repeat: no-repeat;
-        background-image: url("images/scale-needle.png");
-      }
-    }
-  }
-
-  .sti-up-container{
-    display: flex;
-    display: -webkit-flex;
-    flex-direction: column;
-    position: absolute;
-    left: 567px;
-    top: 162px;
-    width: 10px;
-    height: 170px;
-    .sti-up-content{
-      width: 100%;
-      height: 100%;
-      margin-top: auto;
-      rotate: 180deg;
-      background-image: url("images/sti-up.png");
-      animation: sti-test 5s ease-in-out;
-    }
-  }
-  .sti-dn-container{
-    position: absolute;
-    left: 567px;
-    top: 338px;
-    width: 10px;
-    height: 274px;
-    .sti-dn-content{
-      width: 100%;
-      height: 100%;
-      background-image: url("images/sti-down.png");
-      animation: sti-test 5s ease-in-out;
-    }
-  }
-
-  .compass-container {
-    position: absolute;
-    left: 779px;
-    top: 555px;
-    width: 365px;
-    height: 85px;
-    border-radius: 5px;
-    overflow: hidden;
-    mask-image: url("images/horizontal-scale-cover.png");
-    mask-mode: alpha;
-    @layer {
-      .compass {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        background-image: url("images/compass.png");
+    0% {
+        rotate: 0deg;
         background-position: 50% 50%;
-      }
     }
-    @layer {
-      .scale-needle {
-        position: absolute;
-        left: 50%;
-        width: 8px;
-        height: 85px;
-        background-repeat: no-repeat;
-        background-image: url("images/scale-needle-vertical.png");
-      }
+    12% {
+        rotate: 0deg;
+        background-position: 50% 99%;
     }
-  }
+    37% {
+        rotate: 0deg;
+        background-position: 50% 1%;
+    }
+    50% {
+        rotate: 0deg;
+        background-position: 50% 50%;
+    }
+    62% {
+        rotate: -45deg;
+        background-position: 50% 50%;
+    }
+    87% {
+        rotate: 45deg;
+        background-position: 50% 50%;
+    }
+    100% {
+        rotate: 0deg;
+        background-position: 50% 50%;
+    }
+}
 
-  .altimeter-container {
-    position: absolute;
-    left: 1209px;
-    top: 139px;
-    width: 115px;
-    height: 491px;
-    border-radius: 40px;
-    overflow: hidden;
-    mask-image: url("images/vertical-scale-cover.png");
-    mask-mode: alpha;
-    @layer {
-      .altimeter {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        background-image: url("images/altimeter-scale.png");
-        background-position: 50% -1080px;
-        background-repeat: no-repeat;
-        animation: speed-scale-test 5s ease-in-out;
-        transition: background-position 2s linear;
-      }
+@keyframes speed-scale-test {
+    0% {
+        background-position: 50% -1080px
     }
-    @layer {
-      .scale-needle {
+    25% {
+        background-position: 50% -200px
+    }
+    75% {
+        background-position: 50% -1280px
+    }
+    100% {
+        background-position: 50% -1080px
+    }
+}
+
+@keyframes sti-test {
+    0% {
+        height: 0
+    }
+    25% {
+        height: 100%
+    }
+    100% {
+        height: 0
+    }
+}
+
+/*layout styles*/
+.dashboard.game-connected {
+    background-image: url("images/neomorphic.png");
+
+    .info-strip {
+        font: 30pt Helvetica, Arial, sans-serif;
+        color: #bfbfbf;
+
+        .mission-route {
+            display: flex;
+            flex-direction: row;
+            position: absolute;
+            top: 44px;
+            left: 17px;
+        }
+
+        .mission-deadline {
+            display: flex;
+            flex-direction: row;
+            position: absolute;
+            top: 44px;
+            left: 655px;
+        }
+
+        .truck-info {
+            display: flex;
+            flex-direction: row;
+            position: absolute;
+            top: 44px;
+            left: 979px;
+        }
+
+        .mission-distance {
+            display: flex;
+            flex-direction: row;
+            position: absolute;
+            top: 44px;
+            left: 1349px;
+        }
+
+        .distance-subtext {
+            display: flex;
+            flex-direction: row;
+            color: #ff3333;
+            font-size: 15pt;
+            position: relative;
+            top: 17px;
+
+            .km {
+                color: #bfbfbf;
+            }
+        }
+
+        .clock {
+            font-size: 67px;
+            font-family: din-pro, Helvetica, serif;
+            position: absolute;
+            left: 1695px;
+            top: 10px;
+            width: 160px;
+            height: 57px;
+            color: #bfbfbf;
+        }
+    }
+
+    .fuelBar {
+        background-image: url("images/fuel-bar.png");
         position: absolute;
-        top: 192px;
-        width: 115px;
+        left: 1409px;
+        top: 225px;
+        width: 452px;
         height: 8px;
         background-repeat: no-repeat;
-        background-image: url("images/scale-needle.png");
-      }
     }
-  }
+
+    .prediction {
+        font-family: Helvetica, Arial, sans-serif;
+        position: absolute;
+        left: 0;
+        top: -139px;
+
+        .gameSpeed {
+            font-size: 50px;
+            color: rgb(223, 114, 4);
+            position: absolute;
+            left: 714.55px;
+            top: 980.784px;
+            width: 80px;
+            height: 37px;
+        }
+
+        .eta {
+            font-size: 50px;
+            color: rgb(223, 114, 4);
+            text-align: start;
+            position: absolute;
+            left: 1077px;
+            top: 980.784px;
+            width: 122px;
+            height: 37px;
+        }
+
+        .ete {
+            font-size: 125px;
+            color: rgb(70, 135, 199);
+            position: absolute;
+            left: 718.844px;
+            top: 1048.571px;
+            width: 476px;
+            height: 91px;
+        }
+    }
+
+    .fuel-container {
+        font-family: Helvetica, sans-serif;
+        color: rgb(191, 191, 191);
+        position: absolute;
+        left: 0;
+        top: -139px;
+
+        .fuelPercentage {
+            font-size: 25px;
+            position: absolute;
+            left: 1402.536px;
+            top: 327.271px;
+            width: 63px;
+            height: 19px;
+        }
+
+        .fob {
+            font-size: 42px;
+            position: absolute;
+            text-align: end;
+            left: 1670.138px;
+            top: 433.784px;
+            width: 106px;
+            height: 36px;
+        }
+
+        .fuelCapacity {
+            font-size: 42px;
+            position: absolute;
+            text-align: end;
+            left: 1670.138px;
+            top: 493.784px;
+            width: 106px;
+            height: 36px;
+        }
+
+        .fuelConsump {
+            font-size: 42px;
+            position: absolute;
+            left: 1656.488px;
+            top: 557.784px;
+            width: 122px;
+            height: 36px;
+            text-align: end;
+        }
+
+        .fuelRange {
+            font-size: 75px;
+            position: absolute;
+            left: 1444.437px;
+            top: 664.421px;
+            width: 357px;
+            height: 55px;
+        }
+
+        .range-km {
+            font-size: 42px;
+            position: absolute;
+            left: 1730px;
+            top: 695px;
+            color: #787878;
+        }
+    }
+
+    .wear-container {
+        position: absolute;
+        left: 0;
+        top: -139px;
+        font: 25px Helvetica, Arial, sans-serif;
+        color: rgb(191, 191, 191);
+
+        .trailer-wear {
+            position: absolute;
+            left: 62px;
+            top: 375px;
+            width: 63px;
+            height: 20px;
+        }
+
+        .truck-wearCabin {
+            position: absolute;
+            left: 355px;
+            top: 375px;
+            width: 63px;
+            height: 20px;
+        }
+
+        .truck-wearEngine {
+            position: absolute;
+            left: 437.536px;
+            top: 473.271px;
+            width: 63px;
+            height: 20px;
+        }
+
+        .truck-wearTransmission {
+            position: absolute;
+            left: 437.536px;
+            top: 567.271px;
+            width: 63px;
+            height: 20px;
+        }
+
+        .truck-wearSum {
+            position: absolute;
+            left: 437.536px;
+            top: 667.271px;
+            width: 63px;
+            height: 20px;
+        }
+
+        .truck-wearChassis {
+            position: absolute;
+            left: 208.536px;
+            top: 667.271px;
+            width: 63px;
+            height: 20px;
+        }
+
+        .truck-wearWheels {
+            position: absolute;
+            left: 61.536px;
+            top: 667.271px;
+            width: 63px;
+            height: 20px;
+        }
+    }
+
+    .odometer-container {
+        position: absolute;
+        left: 79px;
+        top: 877px;
+        width: 414px;
+        height: 81px;
+        border-radius: 10px;
+        overflow: hidden;
+        background-repeat: no-repeat;
+        background-image: url("images/odometer.png");
+        mask-image: url("images/odometer-cover.png");
+        mask-mode: alpha;
+
+        .odometer-digit0 {
+            position: absolute;
+            width: 55px;
+            top: 4px;
+            height: 100%;
+            background-image: url("images/wheel-black.png");
+            left: 4px;
+            border-radius: 0;
+            background-position: 50% 0%;
+        }
+
+        .odometer-digit1 {
+            position: absolute;
+            width: 55px;
+            top: 4px;
+            height: 100%;
+            background-image: url("images/wheel-black.png");
+            left: 54px;
+            border-radius: 0;
+            background-position: 50% 0%;
+        }
+
+        .odometer-digit2 {
+            position: absolute;
+            width: 55px;
+            top: 4px;
+            height: 100%;
+            background-image: url("images/wheel-black.png");
+            left: 106px;
+            border-radius: 0;
+            background-position: 50% 0%;
+        }
+
+        .odometer-digit3 {
+            position: absolute;
+            width: 55px;
+            top: 4px;
+            height: 100%;
+            background-image: url("images/wheel-black.png");
+            left: 182px;
+            border-radius: 0;
+            background-position: 50% 0%;
+        }
+
+        .odometer-digit4 {
+            position: absolute;
+            width: 55px;
+            top: 4px;
+            height: 100%;
+            background-image: url("images/wheel-black.png");
+            left: 234px;
+            border-radius: 0;
+            background-position: 50% 0%;
+        }
+
+        .odometer-digit5 {
+            position: absolute;
+            width: 55px;
+            top: 4px;
+            height: 100%;
+            background-image: url("images/wheel-black.png");
+            left: 286px;
+            border-radius: 0;
+            background-position: 50% 0%;
+        }
+
+        .odometer-decimal {
+            position: absolute;
+            width: 55px;
+            top: 4px;
+            height: 100%;
+            background-image: url("images/wheel-red.png");
+            left: 360px;
+            border-radius: 0;
+            background-position: 50% 0%;
+        }
+    }
+
+    .attitude-indicator-container {
+        position: absolute;
+        left: 779px;
+        top: 140px;
+        width: 365px;
+        height: 388px;
+        border-radius: 40px;
+        overflow: hidden;
+        background-image: url("images/attitude-indicator-background.png");
+        mask-image: url("images/attitude-indicator-cover.png");
+        mask-mode: alpha;
+
+        .attitude-indicator {
+            position: absolute;
+            left: -25%;
+            top: -25%;
+            width: 150%;
+            height: 150%;
+            background-image: url("images/attitude-content.png");
+            background-position: 50% 50%;
+            background-repeat: no-repeat;
+            animation-name: asi-test;
+            animation-duration: 5s;
+            animation-timing-function: ease-in-out;
+            transition: background-position 250ms linear;
+        }
+    }
+
+    .speed-indicator-container {
+        position: absolute;
+        left: 601px;
+        top: 139px;
+        width: 115px;
+        height: 491px;
+        border-radius: 40px;
+        overflow: hidden;
+        mask-image: url("images/vertical-scale-cover.png");
+        mask-mode: alpha;
+        @layer {
+            .speed-indicator {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                background-image: url("images/speed-scale.png");
+                background-position: 50% -1080px;
+                background-repeat: no-repeat;
+                transition: background-position 200ms linear;
+            }
+        }
+        @layer {
+            .scale-needle {
+                position: absolute;
+                top: 192px;
+                width: 115px;
+                height: 8px;
+                background-repeat: no-repeat;
+                background-image: url("images/scale-needle.png");
+            }
+        }
+    }
+
+    .sti-up-container {
+        display: flex;
+        display: -webkit-flex;
+        flex-direction: column;
+        position: absolute;
+        left: 567px;
+        top: 162px;
+        width: 10px;
+        height: 170px;
+
+        .sti-up-content {
+            width: 100%;
+            height: 100%;
+            margin-top: auto;
+            rotate: 180deg;
+            background-image: url("images/sti-up.png");
+            animation: sti-test 5s ease-in-out;
+        }
+    }
+
+    .sti-dn-container {
+        position: absolute;
+        left: 567px;
+        top: 338px;
+        width: 10px;
+        height: 274px;
+
+        .sti-dn-content {
+            width: 100%;
+            height: 100%;
+            background-image: url("images/sti-down.png");
+            animation: sti-test 5s ease-in-out;
+        }
+    }
+
+    .compass-container {
+        position: absolute;
+        left: 779px;
+        top: 555px;
+        width: 365px;
+        height: 85px;
+        border-radius: 5px;
+        overflow: hidden;
+        mask-image: url("images/horizontal-scale-cover.png");
+        mask-mode: alpha;
+        @layer {
+            .compass {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                background-image: url("images/compass.png");
+                background-position: 50% 50%;
+            }
+        }
+        @layer {
+            .scale-needle {
+                position: absolute;
+                left: 50%;
+                width: 8px;
+                height: 85px;
+                background-repeat: no-repeat;
+                background-image: url("images/scale-needle-vertical.png");
+            }
+        }
+    }
+
+    .altimeter-container {
+        position: absolute;
+        left: 1209px;
+        top: 139px;
+        width: 115px;
+        height: 491px;
+        border-radius: 40px;
+        overflow: hidden;
+        mask-image: url("images/vertical-scale-cover.png");
+        mask-mode: alpha;
+        @layer {
+            .altimeter {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                background-image: url("images/altimeter-scale.png");
+                background-position: 50% -1080px;
+                background-repeat: no-repeat;
+                transition: background-position 2s linear;
+            }
+        }
+        @layer {
+            .scale-needle {
+                position: absolute;
+                top: 192px;
+                width: 115px;
+                height: 8px;
+                background-repeat: no-repeat;
+                background-image: url("images/scale-needle.png");
+            }
+        }
+    }
 }
 
 /*
