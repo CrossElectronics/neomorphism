@@ -10,14 +10,7 @@ Funbit.Ets.Telemetry.Dashboard.prototype.initialize = function (skinConfig, util
     // so you may perform any DOM or resource initializations / image preloading here
 
     utils.preloadImages([
-        'images/bg-off.png', 'images/bg-on.png',
-        'images/blinker-left-off.png', 'images/blinker-left-on.png',
-        'images/blinker-right-off.png', 'images/blinker-right-on.png',
-        'images/cruise-off.png', 'images/cruise-on.png',
-        'images/highbeam-off.png', 'images/highbeam-on.png',
-        'images/lowbeam-off.png', 'images/lowbeam-on.png',
-        'images/parklights-off.png', 'images/parklights-on.png',
-        'images/trailer-off.png', 'images/trailer-on.png'
+
     ]);
 
     // return to menu by a click
@@ -50,8 +43,6 @@ Funbit.Ets.Telemetry.Dashboard.prototype.filter = function (data, utils) {
         : 0;
     // convert kg to t
     data.trailer.mass = data.hasJob ? (Math.round(data.trailer.mass / 1000.0) + 't') : '';
-    // format odometer data as: 00000.0
-    data.truck.odometer = utils.formatFloat(data.truck.odometer, 1);
     // convert gear to readable format
     data.truck.gear = data.truck.displayedGear; // use displayed gear
     data.truck.gear = data.truck.gear > 0
@@ -97,7 +88,7 @@ Funbit.Ets.Telemetry.Dashboard.prototype.filter = function (data, utils) {
     data.compassPos = (256 - heading) * 3.33;
     return data;
 };
-// @ts-ignore
+
 Funbit.Ets.Telemetry.Dashboard.prototype.render = function (data, utils) {
     const asi = document.getElementById("attitude-indicator");
     asi.style.rotate = (data.truck.placement.roll * 360) + "deg";
@@ -119,4 +110,46 @@ Funbit.Ets.Telemetry.Dashboard.prototype.render = function (data, utils) {
 
     const compass = document.getElementById("compass");
     compass.style.backgroundPosition = data.compassPos + "px 50%";
+
+    //Odometer
+    const odo = data.truck.odometer;
+    const digDec = document.getElementById("odometer-decimal");
+    const odoDec = Math.floor((odo - Math.floor(odo)) * 1000);
+    digDec.style.backgroundPosition = "50% " + getDecimalOffset(odoDec, 100, 10.1/9) + "%";
+    for (let i = 0; i < 6; i++) {
+        const digitElem = document.getElementById("odometer-digit" + i);
+        const intPart = Math.floor(odo);
+        const workingPart = utils.formatInteger(intPart, 6).substring(i);
+        const currentDigit = workingPart[0];
+        const nextDigit = i === 5 ? 9 : parseInt(workingPart[1]);
+        const fullString = utils.formatInteger(Math.floor(odo), 6) + "." + utils.formatInteger(odoDec, 3);
+        const remainder = fullString.toString().substring(i + 1);
+        const remainderFloat = parseFloat(remainder)
+        console.log(odo, remainder, remainderFloat)
+        const offset = getDigitOffset(
+            parseInt(currentDigit),
+            nextDigit,
+            remainderFloat,
+            100,
+            10.1/9) ;
+        //console.log(i, intPart, workingPart, currentDigit, remainder, offset)
+        digitElem.style.backgroundPosition = "50% " + offset + "%";
+    }
+}
+
+function len(num){
+    return Math.ceil(Math.log10(num+1))
+}
+
+function getDecimalOffset(deci, height, coefficient){
+    return deci / 10 ** 3 * height * coefficient;
+}
+
+function getDigitOffset(curr, next, rem, height, coefficient){
+    if (10 ** len(Math.floor(rem)) - rem < 0.1 && next === 9) {
+        return ((curr + 1) / 10 + rem - 10 ** len(Math.floor(rem))) * height * coefficient;
+    }
+    else {
+        return curr / 10 * height * coefficient;
+    }
 }

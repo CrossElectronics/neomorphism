@@ -109,6 +109,90 @@ body {
 .dashboard.game-connected.yes {
   background-image: url("images/neomorphic.png");
 
+  .odometer-container {
+    position: absolute;
+    left: 79px;
+    top: 877px;
+    width: 414px;
+    height: 81px;
+    border-radius: 10px;
+    overflow: hidden;
+    background-repeat: no-repeat;
+    background-image: url("images/odometer.png");
+    mask-image: url("images/odometer-cover.png");
+    mask-mode: alpha;
+    .odometer-digit0 {
+      position: absolute;
+      width: 55px;
+      top: 4px;
+      height: 100%;
+      background-image: url("images/wheel-black.png");
+      left: 4px;
+      border-radius: 0;
+      background-position: 50% 0%;
+    }
+    .odometer-digit1 {
+      position: absolute;
+      width: 55px;
+      top: 4px;
+      height: 100%;
+      background-image: url("images/wheel-black.png");
+      left: 54px;
+      border-radius: 0;
+      background-position: 50% 0%;
+    }
+    .odometer-digit2 {
+      position: absolute;
+      width: 55px;
+      top: 4px;
+      height: 100%;
+      background-image: url("images/wheel-black.png");
+      left: 106px;
+      border-radius: 0;
+      background-position: 50% 0%;
+    }
+    .odometer-digit3 {
+      position: absolute;
+      width: 55px;
+      top: 4px;
+      height: 100%;
+      background-image: url("images/wheel-black.png");
+      left: 182px;
+      border-radius: 0;
+      background-position: 50% 0%;
+    }
+    .odometer-digit4 {
+      position: absolute;
+      width: 55px;
+      top: 4px;
+      height: 100%;
+      background-image: url("images/wheel-black.png");
+      left: 234px;
+      border-radius: 0;
+      background-position: 50% 0%;
+    }
+    .odometer-digit5 {
+      position: absolute;
+      width: 55px;
+      top: 4px;
+      height: 100%;
+      background-image: url("images/wheel-black.png");
+      left: 286px;
+      border-radius: 0;
+      background-position: 50% 0%;
+    }
+    .odometer-decimal {
+      position: absolute;
+      width: 55px;
+      top: 4px;
+      height: 100%;
+      background-image: url("images/wheel-red.png");
+      left: 360px;
+      border-radius: 0;
+      background-position: 50% 0%;
+    }
+  }
+
   .attitude-indicator-container {
     position: absolute;
     left: 779px;
@@ -219,7 +303,6 @@ body {
         height: 100%;
         background-image: url("images/compass.png");
         background-position: 50% 50%;
-        transition: background-position 500ms linear;
       }
     }
     @layer {
