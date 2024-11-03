@@ -56,9 +56,14 @@ Funbit.Ets.Telemetry.Dashboard.prototype.filter = function (data, utils) {
         data.truck.wearCabin * 100 +
         data.truck.wearChassis * 100 +
         data.truck.wearWheels * 100;
-    wearSumPercent = Math.min(wearSumPercent, 100);
+    wearSumPercent = 100 - Math.min(wearSumPercent, 100);
     data.truck.wearSum = Math.round(wearSumPercent) + '%';
-    data.trailer.wear = Math.round(data.trailer.wear * 100) + '%';
+    data.trailer.wear = (100 - Math.round(data.trailer.wear * 100)) + '%';
+    data.truck.wearCabin = getIntegrity(data.truck.wearCabin);
+    data.truck.wearEngine = getIntegrity(data.truck.wearEngine);
+    data.truck.wearChassis = getIntegrity(data.truck.wearChassis);
+    data.truck.wearWheels = getIntegrity(data.truck.wearWheels);
+    data.truck.wearTransmission = getIntegrity(data.truck.wearTransmission);
     // return changed data to the core for rendering
 
     // Own data
@@ -78,7 +83,7 @@ Funbit.Ets.Telemetry.Dashboard.prototype.filter = function (data, utils) {
     const accelVct = data.truck.acceleration;
     const accel = Math.sqrt(accelVct.x**2 + accelVct.y**2 + accelVct.z**2);
     let spdTrendDelta = accel * 10;// speed trend after 10 sec
-    if (data.truck.speed <= historySpd - 0.01) spdTrendDelta = -spdTrendDelta;
+    if (data.truck.speed <= historySpd - 0.05) spdTrendDelta = -spdTrendDelta;
     data.ledCount = Math.max(Math.min(Math.round(spdTrendDelta / 2.5), 11), -19);
     historySpd = data.truck.speed;
 
@@ -152,4 +157,8 @@ function getDigitOffset(curr, next, rem, height, coefficient){
     else {
         return curr / 10 * height * coefficient;
     }
+}
+
+function getIntegrity(wear){
+    return (100 -Math.round(wear * 100) + "%")
 }

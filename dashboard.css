@@ -31,6 +31,10 @@ body {
   font-family: din-pro;
   src: url("fonts/din_pro.otf") format("opentype");
 }
+@font-face {
+  font-family: Helvetica;
+  src: url("fonts/helvetica_neue.otf") format("opentype");
+}
 @keyframes asi-test {
   0% {rotate: 0deg; background-position: 50% 50%;}
   12% {rotate: 0deg; background-position: 50% 99%;}
@@ -106,8 +110,65 @@ body {
   }
 }
 
-.dashboard.game-connected.yes {
+.dashboard.game-connected {
   background-image: url("images/neomorphic.png");
+
+  .wear-container {
+    position: absolute;
+    left: 0;
+    top: -139px;
+    font: 25px Helvetica, Arial, sans-serif;
+    color: rgb(255, 255, 255);
+    .trailer-wear {
+      position: absolute;
+      left: 62px;
+      top: 375px;
+      width: 63px;
+      height: 20px;
+    }
+    .truck-wearCabin {
+      position: absolute;
+      left: 355px;
+      top: 375px;
+      width: 63px;
+      height: 20px;
+    }
+    .truck-wearEngine {
+      position: absolute;
+      left: 437.536px;
+      top: 473.271px;
+      width: 63px;
+      height: 20px;
+    }
+    .truck-wearTransmission {
+      position: absolute;
+      left: 437.536px;
+      top: 567.271px;
+      width: 63px;
+      height: 20px;
+    }
+    .truck-wearSum {
+      position: absolute;
+      left: 437.536px;
+      top: 667.271px;
+      width: 63px;
+      height: 20px;
+    }
+    .truck-wearChassis {
+      position: absolute;
+      left: 208.536px;
+      top: 667.271px;
+      width: 63px;
+      height: 20px;
+    }
+    .truck-wearWheels {
+      position: absolute;
+      left: 61.536px;
+      top: 667.271px;
+      width: 63px;
+      height: 20px;
+    }
+  }
 
   .odometer-container {
     position: absolute;
