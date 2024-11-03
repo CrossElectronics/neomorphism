@@ -225,7 +225,7 @@ body {
         }
 
         .fob {
-            font-size: 42px;
+            font-size: 45px;
             position: absolute;
             text-align: end;
             left: 1670.138px;
@@ -235,7 +235,7 @@ body {
         }
 
         .fuelCapacity {
-            font-size: 42px;
+            font-size: 45px;
             position: absolute;
             text-align: end;
             left: 1670.138px;
@@ -245,7 +245,7 @@ body {
         }
 
         .fuelConsump {
-            font-size: 42px;
+            font-size: 45px;
             position: absolute;
             left: 1656.488px;
             top: 557.784px;
@@ -467,7 +467,7 @@ body {
         mask-mode: alpha;
         @layer {
             .speed-indicator {
-                position: absolute;
+                position: relative;
                 width: 100%;
                 height: 100%;
                 background-image: url("images/speed-scale.png");

@@ -54,7 +54,7 @@ Funbit.Ets.Telemetry.Dashboard.prototype.filter = function (data, utils) {
         data.truck.wearCabin * 100 +
         data.truck.wearChassis * 100 +
         data.truck.wearWheels * 100;
-    wearSumPercent = 100 - Math.min(wearSumPercent, 100);
+    wearSumPercent = 100 - Math.min(wearSumPercent / 5, 100);
     data.truck.wearSum = Math.round(wearSumPercent) + '%';
     data.trailer.wear = (100 - Math.round(data.trailer.wear * 100)) + '%';
     data.truck.wearCabin = getIntegrity(data.truck.wearCabin);
@@ -72,9 +72,10 @@ Funbit.Ets.Telemetry.Dashboard.prototype.filter = function (data, utils) {
         data.fuelPercentage = Math.round(data.truck.fuel / data.truck.fuelCapacity * 100) + "%";
         data.fob = Math.round(data.truck.fuel);
         data.fuelCapacity = Math.round(data.truck.fuelCapacity);
-        data.fuelConsump = utils.formatFloat(data.truck.fuelAverageConsumption, 2)
+        //TODO: fix data streaming issue
+        data.fuelConsump = utils.formatFloat(data.truck.fuelAverageConsumption*100, 2)
         data.fuelRange = utils.formatFloat(data.truck.fuel / data.truck.fuelAverageConsumption, 2)
-        if (data.fuelRange >= 10000) data.fuelRange = 9999.99;
+        //if (data.fuelRange >= 10000) data.fuelRange = 9999.99;
 
         const now = new Date();
         if (data.game.timeScale > 10) {
@@ -90,7 +91,7 @@ Funbit.Ets.Telemetry.Dashboard.prototype.filter = function (data, utils) {
                 remTime = 99 * 3600;
             }
 
-            console.log(new Date(remTime * 1000).toISOString())
+            //console.log(new Date(remTime * 1000).toISOString())
             data.ete = new Date(remTime * 1000).toISOString().substring(11, 19);
 
             const eta = new Date(now.setSeconds(remTime * 1.5));
@@ -107,8 +108,8 @@ Funbit.Ets.Telemetry.Dashboard.prototype.filter = function (data, utils) {
     data.gameSpeed = "x" + data.game.timeScale;
 
     const remainingDate = new Date(data.job.remainingTime)
-    data.job.remainingTime = data.game.connected ?
-        utils.formatInteger(remainingDate.getDate(), 2) + " d " +
+    data.job.remainingTime = data.hasJob ?
+        utils.formatInteger(remainingDate.getDate() - 1, 2) + ":" +
         utils.formatInteger(remainingDate.getHours(), 2) + ":" +
         utils.formatInteger(remainingDate.getMinutes(), 2) + ""
         :
@@ -122,8 +123,9 @@ Funbit.Ets.Telemetry.Dashboard.prototype.filter = function (data, utils) {
     const accelVct = data.truck.acceleration;
     const accel = Math.sqrt(accelVct.x ** 2 + accelVct.y ** 2 + accelVct.z ** 2);
     let spdTrendDelta = accel * 10;// speed trend after 10 sec
-    if (data.truck.speed <= historySpd - 0.05) spdTrendDelta = -spdTrendDelta;
+    if (data.truck.speed <= historySpd - 0.01) spdTrendDelta = -spdTrendDelta;
     data.ledCount = Math.max(Math.min(Math.round(spdTrendDelta / 2.5), 11), -19);
+    if (Math.abs(data.ledCount) < 2) data.ledCount = 0;
     historySpd = data.truck.speed;
 
     data.altPos = -1080 + data.truck.placement.y * 3.2;
