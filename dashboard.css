@@ -451,7 +451,7 @@ body {
             background-position: 50% 50%;
             background-repeat: no-repeat;
 
-            transition: background-position 250ms linear;
+            transition: background-position 500ms linear;
         }
     }
 

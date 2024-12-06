@@ -1,5 +1,32 @@
 ﻿// @ts-ignore
+class DualBuffer{
+    constructor(size){
+        this.arr = new Array(size);
+        this.arr.fill(0, 0, size - 1);
+        this.timestamp = new Array(size);
+        const initTime = Date.now();
+        this.timestamp.fill(initTime, 0, size - 1);
+    }
+    add(item){
+        this.arr.shift();
+        this.arr.push(item);
+        this.timestamp.shift();
+        this.timestamp.push(Date.now());
+    }
+    getDiff(){
+        let arr = this.arr
+        return arr[arr.length - 1] - arr[0];
+    }
+    getFirstTime(){
+        let timestamp = this.timestamp
+        return timestamp[0];
+    }
+}
+
 let historySpd = 0;
+let historyTime = 0;
+const buffer = new DualBuffer(20);
+
 Funbit.Ets.Telemetry.Dashboard.prototype.initialize = function (skinConfig, utils) {
     //
     // skinConfig - a copy of the skin configuration from config.json
@@ -73,8 +100,10 @@ Funbit.Ets.Telemetry.Dashboard.prototype.filter = function (data, utils) {
         data.fob = Math.round(data.truck.fuel);
         data.fuelCapacity = Math.round(data.truck.fuelCapacity);
         //TODO: fix data streaming issue
-        data.fuelConsump = utils.formatFloat(data.truck.fuelAverageConsumption*100, 2)
-        data.fuelRange = utils.formatFloat(data.truck.fuel / data.truck.fuelAverageConsumption, 2)
+        if (data.truck.fuelAverageConsumption !== 0) {
+            data.fuelConsump = utils.formatFloat(data.truck.fuelAverageConsumption*100, 2)
+            data.fuelRange = utils.formatFloat(data.truck.fuel / data.truck.fuelAverageConsumption, 0)
+        }
         //if (data.fuelRange >= 10000) data.fuelRange = 9999.99;
 
         const now = new Date();
@@ -120,13 +149,28 @@ Funbit.Ets.Telemetry.Dashboard.prototype.filter = function (data, utils) {
     data.distanceDecimal = Math.floor((remainDist - distInt * 1000) / 100);
     data.speedPos = -1080 + data.truck.speed * 6.20;
     // speed trend
+    /*
     const accelVct = data.truck.acceleration;
     const accel = Math.sqrt(accelVct.x ** 2 + accelVct.y ** 2 + accelVct.z ** 2);
     let spdTrendDelta = accel * 10;// speed trend after 10 sec
     if (data.truck.speed <= historySpd - 0.01) spdTrendDelta = -spdTrendDelta;
+     */
+
+    // new speed trend
+    buffer.add(historySpd)
+    const accel = buffer.getDiff() / (Date.now() - buffer.getFirstTime()) * 1000
+    console.log(buffer.getDiff(), Date.now() - buffer.getFirstTime())
+    const spdTrendDelta = accel * 3;
     data.ledCount = Math.max(Math.min(Math.round(spdTrendDelta / 2.5), 11), -19);
-    if (Math.abs(data.ledCount) < 2) data.ledCount = 0;
+
+    /*
+    const accel = (data.truck.speed - historySpd) / (Date.now() - historyTime) * 1000
+    const spdTrendDelta = accel * 3;
+    data.ledCount = Math.max(Math.min(Math.round(spdTrendDelta / 2.5), 11), -19);
+    */
+    //if (Math.abs(data.ledCount) < 1) data.ledCount = 0;
     historySpd = data.truck.speed;
+    historyTime = Date.now()
 
     data.altPos = -1080 + data.truck.placement.y * 3.2;
 
